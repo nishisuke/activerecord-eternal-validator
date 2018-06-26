@@ -6,3 +6,5 @@
 /pkg/
 /spec/reports/
 /tmp/
+/Gemfile.lock
+/activerecord_eternal_validator_test.db
