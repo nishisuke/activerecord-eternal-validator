@@ -1,8 +1,7 @@
 # ActiverecordEternalValidator
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/activerecord_eternal_validator`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+It's a activerecord validator, which validates that value is not changed.  
+It validates value only on update.
 
 ## Installation
 
@@ -22,7 +21,17 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```
+class Person < ActiveRecord::Base
+  validates :birthday, 'activerecord_eternal_validator/eternal': true
+end
+
+person = Person.create!(birthday: Date.new(1994, 7, 7))
+
+person.birthday = Date.today
+puts person.valid?
+#=> false
+```
 
 ## Development
 
