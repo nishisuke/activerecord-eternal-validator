@@ -22,3 +22,23 @@ class ActiverecordEternalValidator::EternalValidatorTest < Minitest::Test
     assert person.valid?
   end
 end
+
+class ActiverecordEternalValidator::EternalValidatorChangeFromNilTest < Minitest::Test
+  def setup
+    Person.validates :name, 'activerecord_eternal_validator/eternal': { change_from_nil: true }
+  end
+
+  def test_it_is_valid_when_name_was_nil
+    person = Person.create!(name: nil)
+    person.name = 'bar'
+
+    assert person.valid?
+  end
+
+  def test_it_is_invalid_when_name_was_not_nil
+    person = Person.create!(name: 'hoge')
+    person.name = 'bar'
+
+    refute person.valid?
+  end
+end
